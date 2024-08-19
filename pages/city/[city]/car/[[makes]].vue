@@ -1,0 +1,13 @@
+<template>
+<div>
+    <CarCards />
+</div>
+</template>
+
+<script lang="ts" setup>
+
+</script>
+
+<style>
+
+</style>
