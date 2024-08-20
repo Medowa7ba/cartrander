@@ -24,7 +24,7 @@
             placeholder=""
             @change-input="onChangeInput"
           />
-          <CarAdImage @change-input="onChangeInput" />
+  
           <div>
             <button
               :disabled="false"
@@ -138,14 +138,8 @@ const handleClick = async () => {
   const fileName = Math.floor(Math.random() * 10000000000000000);
   console.log(fileName);
   
-  const { data, error } = await supabase.storage.from("images").upload("public/" + fileName);
-  console.log(data);
-
-  if(error){
-    console.log(error );
-    
-    return (errorMessage.value = 'Connot upload image')
-  }
+  // const { data, error } = await supabase.storage.from("images").upload("public/" + fileName);
+  // console.log(data);
   const body = {
     
     ...info.value,
@@ -155,7 +149,7 @@ const handleClick = async () => {
     miles: parseInt(info.value.miles),
     name: `${info.value.make} ${info.value.model}`,
     listerId: user.value.id,
-    image: data.path,
+    image: 'https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/chrome/white/2022TOC040001_1280_01',
     year: parseInt(info.value.year),
     price: parseInt(info.value.price),
   };

@@ -2,7 +2,7 @@
   <div class="shadow rounded overflow-hidden flex justify-between mb-4">
     <div class="flex">
       <img
-        :src="listing.url"
+        src="https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/chrome/white/2022TOC040001_1280_01"
         alt=""
         class="w-80 mr-3 h-44"
       />
