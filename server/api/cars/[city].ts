@@ -2,10 +2,7 @@ import cars from "@/data/cars.json";
 export default defineEventHandler(async (event) => {
   const { make, minPrice, maxPrice } = getQuery(event);
   const { city } = event.context.params;
-  console.log(minPrice);
-  let filterdCar = cars;
-  //   console.log(filterdCar.make.toLowerCase());
-  
+  let filterdCar = cars;  
   filterdCar = filterdCar.filter((car) => {
     return car.city.toLowerCase() === city.toLowerCase();
   });

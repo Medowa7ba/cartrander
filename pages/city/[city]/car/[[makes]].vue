@@ -7,18 +7,20 @@
 
 <script lang="ts" setup>
 const route = useRoute();
-const { data: cars, refresh } = await useFetchCars(route.params.city, {
+const {data:cars, refresh}= await useFetchCars(route.params.city, {
   minPrice: route.query.minPrice,
   maxPrice: route.query.maxPrice,
-  make: route.params.make,
+  make: route.params.makes,
+  
 });
+// console.log(route.params.makes.toLowerCase());
 
-// watch(
-//   () => route.query,
-//   () => {
-//     window.location.reload(true);
-//   }
-// );
+watch(
+  () => route.query,
+  () => {
+    window.location.reload(true);
+  }
+);
 </script>
 
 <style>
