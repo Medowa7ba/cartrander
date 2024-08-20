@@ -44,8 +44,8 @@ definePageMeta({
 });
 
 const { makes } = useCars();
-// const supabase = useSupabaseClient();
-// const user = useSupabaseUser();
+const supabase = useSupabaseClient();
+const user = useSupabaseUser();
 
 const info = useState("adInfo", () => {
   return {
@@ -126,40 +126,54 @@ const inputs = [
   },
 ];
 
-// const isButtonDisabled = computed(() => {
-//   for (let key in info.value) {
-//     if (!info.value[key]) return true;
-//   }
-//   return false;
-// });
+const isButtonDisabled = computed(() => {
+  for (let key in info.value) {
+    if (!info.value[key]) return true;
+  }
+  return false;
+});
 
-// const handleClick = async () => {
-//   const fileName = Math.floor(Math.random() * 10000000000000000);
-//   const { data, error } = await supabase.storage
-//     .from("images")
-//     .upload("public/" + fileName, info.value.image);
+const handleClick = async () => {
+  console.log(info.value);
+  const fileName = Math.floor(Math.random() * 10000000000000000);
+  console.log(fileName);
+  
+  const { data, error } = await supabase.storage.from("images").upload("public/" + fileName);
+  console.log(data);
 
-//   const body = {
-//     ...info.value,
-//     features: info.value.features.split(", "),
-//     numberOfSeats: info.value.seats,
-//     name: `${info.value.make} ${info.value.model}`,
-//     listerId: user.value.id,
-//     image: data.path,
-//   };
-//   delete body.seats;
+  if(error){
+    console.log(error );
+    
+    return (errorMessage.value = 'Connot upload image')
+  }
+  const body = {
+    
+    ...info.value,
+    city: info.value.city.toLowerCase(),
+    features: info.value.features.split(", "),
+    numberOfSeats: info.value.seats,
+    miles: parseInt(info.value.miles),
+    name: `${info.value.make} ${info.value.model}`,
+    listerId: user.value.id,
+    image: data.path,
+    year: parseInt(info.value.year),
+    price: parseInt(info.value.price),
+  };
+    console.log(body);
+  delete body.seats;
+  try {
+    console.log('sdfsg');
+    
+    const response = await $fetch("/api/car/listings", {
+      method: "post",
+      body,
+    });
 
-//   try {
-//     const response = await $fetch("/api/car/listings", {
-//       method: "post",
-//       body,
-//     });
-
-//     navigateTo("/profile/listings");
-//   } catch (err) {
-//     errorMessage.value = err.statusMessage;
-//     await supabase.storage.from("images").remove(data.path);
-//   }
-// };
+    navigateTo("/profile/listings");
+  } catch (err) {
+    errorMessage.value = err.statusMessage;
+    await supabase.storage.from("images").remove(data.path);
+  }
+};
 </script>
 

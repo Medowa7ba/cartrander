@@ -19,8 +19,9 @@ const logout = async () => {
   // 2) Remove JWT from Cookie browser
   // const { error } = supabase.auth.signOut();
 
+  console.log('dff');
   const { error } = await supabase.auth.signOut();
-
+  
   try {
     await $fetch("/api/_supabase/session", {
       method: "POST",
