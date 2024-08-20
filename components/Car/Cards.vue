@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-const {cars} = useCars();
+
 const favorite = useLocalStorage('favorite', {});
 const handleFavorite = (id:number | string) => {
 if(id in favorite.value){
@@ -19,6 +19,10 @@ if(id in favorite.value){
   }
 }
 }
+const props = defineProps({
+  cars: Array,
+});
+
 </script>
 
 <style>

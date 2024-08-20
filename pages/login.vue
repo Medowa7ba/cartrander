@@ -10,16 +10,13 @@
 definePageMeta({
   layout: "custom",
 });
-
-// const supabase = useSupabaseClient();
-
-// const login = async () => {
-//   const { error } = supabase.auth.signInWithOAuth({
-//     provider: "google",
-//   });
-
-//   if (error) {
-//     console.log(error);
-//   }
-// };
+const supabase = useSupabaseClient();
+const login = async () => {
+  const { error } = supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
+  if (error) {
+    console.log(error);
+  }
+};
 </script>
